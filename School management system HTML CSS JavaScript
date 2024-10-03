@@ -1,0 +1,111 @@
+HTML code-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>School Management System</h1>
+        <form id="studentForm">
+            <input type="text" id="studentName" placeholder="Student Name" required>
+            <input type="number" id="studentAge" placeholder="Student Age" required>
+            <button type="submit">Add Student</button>
+        </form>
+        <h2>Student List</h2>
+        <ul id="studentList"></ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+CSS code-
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+li button {
+    background-color: #dc3545;
+}
+
+Javascript code-
+document.getElementById('studentForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('studentName').value;
+    const age = document.getElementById('studentAge').value;
+    addStudent(name, age);
+
+    this.reset();
+});
+
+function addStudent(name, age) {
+    const studentList = document.getElementById('studentList');
+    const li = document.createElement('li');
+    li.innerText = `${name}, Age: ${age}`;
+    
+    const deleteButton = document.createElement('button');
+    deleteButton.innerText = 'Remove';
+    deleteButton.onclick = function () {
+        studentList.removeChild(li);
+    };
+
+    li.appendChild(deleteButton);
+    studentList.appendChild(li);
+}
